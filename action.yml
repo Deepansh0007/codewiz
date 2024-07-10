@@ -4,6 +4,9 @@ inputs:
   repo:
     description: "The repo url"
     required: true
+  branch:
+    description: "Branch name"
+    required: true
 runs:
   using: "node20"
   main: "dist/index.js"

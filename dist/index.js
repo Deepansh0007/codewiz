@@ -88339,12 +88339,13 @@ main.config();
 
 const run = async () => {
 	const repo = core.getInput("repo");
+    const branch = core.getInput("branch");
 	const embeddingModel = new MistralAIEmbeddings({
 		apiKey: process.env.MISTRAL_API_KEY,
 	});
 
 	const loader = new GithubRepoLoader(repo, {
-		branch: "main",
+		branch,
 		recursive: true,
 		unknown: "warn",
 		maxConcurrency: 5,
