@@ -62358,7 +62358,7 @@ const run = async () => {
 		recursive: true,
 		unknown: "warn",
 		maxConcurrency: 5,
-		accessToken: "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",
+		accessToken: "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",
 		ignoreFiles: ["package-lock.json"],
 	});
 
