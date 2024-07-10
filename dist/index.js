@@ -88349,7 +88349,7 @@ const run = async () => {
 		unknown: "warn",
 		maxConcurrency: 5,
 		accessToken: process.env.GITHUB_ACCESS_TOKEN,
-		ignoreFiles: ["package-lock.json"],
+		ignoreFiles: ["package-lock.json"]
 	});
 
 	const docs = await loader.load();
