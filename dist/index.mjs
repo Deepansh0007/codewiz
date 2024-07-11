@@ -62350,7 +62350,7 @@ const run = async () => {
 	const branch = core.getInput("branch");
 	const embeddingModel = new MistralAIEmbeddings({
 		// apiKey: process.env.MISTRAL_API_KEY,
-		apiKey: "hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx"
+		apiKey: "hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx",
 	});
 
 	const loader = new GithubRepoLoader(repo, {
@@ -62358,7 +62358,7 @@ const run = async () => {
 		recursive: true,
 		unknown: "warn",
 		maxConcurrency: 5,
-		accessToken: "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",
+		accessToken: "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",
 		ignoreFiles: ["package-lock.json"],
 	});
 
@@ -62372,8 +62372,8 @@ const run = async () => {
 	const chunks = await splitter.splitDocuments(docs);
 
 	const store = await QdrantVectorStore.fromDocuments(chunks, embeddingModel, {
-		url: 'https://a042d1af-db1e-4c10-8ec3-27c1c60f4c19.us-east4-0.gcp.cloud.qdrant.io:6333',
-		apiKey: 'hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx',
+		url: "https://a042d1af-db1e-4c10-8ec3-27c1c60f4c19.us-east4-0.gcp.cloud.qdrant.io:6333",
+		apiKey: "hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx",
 		collectionName: "test",
 	});
 	console.log("done");
