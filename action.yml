@@ -10,7 +10,7 @@ inputs:
 runs:
   using: "node20"
   main: "dist/index.mjs"
-# env:
+#  env:
 #   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 #   QDRANT_URL: ${{ secrets.QDRANT_URL }}
 #   QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
