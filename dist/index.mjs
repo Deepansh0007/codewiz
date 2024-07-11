@@ -62357,7 +62357,7 @@ const run = async () => {
 
 	const loader = new GithubRepoLoader(repo, {
 		branch,
-		// accessToken: "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",
+		accessToken: "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",
 		recursive: true,
 		unknown: "warn",
 		maxConcurrency: 5,
