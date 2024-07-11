@@ -62346,8 +62346,10 @@ Either provide one via the "apiKey" field in the constructor, or set the "MISTRA
 
 
 const run = async () => {
+	
 	const repo = core.getInput("repo");
 	const branch = core.getInput("branch");
+
 	const embeddingModel = new MistralAIEmbeddings({
 		// apiKey: process.env.MISTRAL_API_KEY,
 		apiKey: "hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx",
@@ -62355,10 +62357,10 @@ const run = async () => {
 
 	const loader = new GithubRepoLoader(repo, {
 		branch,
+		// accessToken: "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",
 		recursive: true,
 		unknown: "warn",
 		maxConcurrency: 5,
-		accessToken: "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",
 		ignoreFiles: ["package-lock.json"],
 	});
 
@@ -62372,8 +62374,8 @@ const run = async () => {
 	const chunks = await splitter.splitDocuments(docs);
 
 	const store = await QdrantVectorStore.fromDocuments(chunks, embeddingModel, {
-		url: "https://a042d1af-db1e-4c10-8ec3-27c1c60f4c19.us-east4-0.gcp.cloud.qdrant.io:6333",
-		apiKey: "hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx",
+		url: "https://3f399ee3-e7e3-45c6-b7e0-9cfb8651df4b.us-east4-0.gcp.cloud.qdrant.io:6333",
+		apiKey: "arFGLLGUaxLoDBWDD2QGNzK478iteU5hio0pI9QlqYJOz06sVM6pUg",
 		collectionName: "test",
 	});
 	console.log("done");
