@@ -2,14 +2,17 @@ name: "Codewiz"
 description: "Your coding buddy"
 
 inputs:
+  token:
+    description: "Github Access Token"
+    required: true
   repo:
     description: "The repo url"
     required: true
   branch:
     description: "Branch name"
     required: true
-  token:
-    description: "Github Access Token"
+  commit:
+    description: "Commit SHA"
     required: true
 
 runs:

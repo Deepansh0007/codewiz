@@ -62346,17 +62346,19 @@ Either provide one via the "apiKey" field in the constructor, or set the "MISTRA
 
 
 const run = async () => {
-	const repo = core.getInput("repo");
-	const branch = core.getInput("branch");
-	const accessToken = core.getInput("token");
+
+	const githubUrl = core.getInput('repo')
+	const accessToken = core.getInput('token')
+	const commit = core.getInput('commit')
+	const branch = core.getInput('branch').split("/")[2]
 
 	const embeddingModel = new MistralAIEmbeddings({
-		apiKey: process.env.MISTRAL_API_KEY,
+		apiKey: 'hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx',
 	});
 
-	const loader = new GithubRepoLoader(repo, {
-		branch,
+	const loader = new GithubRepoLoader(githubUrl, {
 		accessToken,
+		branch,
 		recursive: true,
 		unknown: "warn",
 		maxConcurrency: 5,
@@ -62381,7 +62383,7 @@ const run = async () => {
 	const store = await QdrantVectorStore.fromDocuments(chunks, embeddingModel, {
 		url: "https://3f399ee3-e7e3-45c6-b7e0-9cfb8651df4b.us-east4-0.gcp.cloud.qdrant.io:6333",
 		apiKey: "arFGLLGUaxLoDBWDD2QGNzK478iteU5hio0pI9QlqYJOz06sVM6pUg",
-		collectionName: "test",
+		collectionName: `${commit}`,
 	});
 	console.log("done");
 };
