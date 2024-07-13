@@ -62346,22 +62346,27 @@ Either provide one via the "apiKey" field in the constructor, or set the "MISTRA
 
 
 const run = async () => {
-	
 	const repo = core.getInput("repo");
 	const branch = core.getInput("branch");
+	const accessToken = core.getInput("token");
 
 	const embeddingModel = new MistralAIEmbeddings({
-		// apiKey: process.env.MISTRAL_API_KEY,
-		apiKey: "hnxZS7E67aBZl87ZglmfEtz5NCLXuIQx",
+		apiKey: process.env.MISTRAL_API_KEY,
 	});
 
 	const loader = new GithubRepoLoader(repo, {
 		branch,
-		accessToken: "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",
+		accessToken,
 		recursive: true,
 		unknown: "warn",
 		maxConcurrency: 5,
-		ignoreFiles: ["package-lock.json"],
+		ignoreFiles: [
+			"package-lock.json",
+			"tsconfig.json",
+			"test/",
+			"tests/",
+			"Dockerfile",
+		],
 	});
 
 	const docs = await loader.load();

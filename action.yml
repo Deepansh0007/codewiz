@@ -1,5 +1,6 @@
 name: "Codewiz"
 description: "Your coding buddy"
+
 inputs:
   repo:
     description: "The repo url"
@@ -7,12 +8,16 @@ inputs:
   branch:
     description: "Branch name"
     required: true
+  token:
+    description: "Github Access Token"
+    required: true
+
 runs:
   using: "node20"
   main: "dist/index.mjs"
-#  env:
-#   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#   QDRANT_URL: ${{ secrets.QDRANT_URL }}
-#   QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
-#   MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
-    
+
+env:
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  QDRANT_URL: ${{ secrets.QDRANT_URL }}
+  QDRANT_API_KEY: ${{ secrets.QDRANT_API_KEY }}
+  MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
