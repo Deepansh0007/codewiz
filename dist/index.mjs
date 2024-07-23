@@ -74162,7 +74162,6 @@ const run = async () => {
     const matches = regex.exec(repss);
     
     const jsonFormat = JSON.parse(matches[1].trim());
-    console.log(jsonFormat);
     const functions = jsonFormat.Functions || [];
     const classes = jsonFormat.Classes || [];
     console.log(`Modified ${functions.length} functions and ${classes.length} classes`)
