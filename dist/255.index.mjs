@@ -16,7 +16,7 @@ const ENDPOINT = 'https://api.mistral.ai';
 // We can't use a top level await if eventually this is to be converted
 // to typescript and compiled to commonjs, or similarly using babel.
 const configuredFetch = Promise.resolve(
-  globalThis.fetch ?? __webpack_require__.e(/* import() */ 133).then(__webpack_require__.t.bind(__webpack_require__, 2133, 19)).then((m) => m.default),
+  globalThis.fetch ?? Promise.resolve(/* import() */).then(__webpack_require__.t.bind(__webpack_require__, 2133, 19)).then((m) => m.default),
 );
 
 /**
