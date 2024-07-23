@@ -74033,6 +74033,7 @@ const run = async () => {
 
   try {
     if (!(await qdrant.collectionExists(collectionName)).exists) {
+      console.log("Creating a new collection...")
       await qdrant.createCollection(collectionName, {
         vectors: {
           size: 1024,
@@ -74082,7 +74083,8 @@ const run = async () => {
       const jsonFormat = JSON.parse(matches[1].trim());
 
       const functions = jsonFormat[0].Functions || [];
-      const classes = jsonFormat[0].Classes || [];
+      const classes = jsonFormat[1].Classes || [];
+      console.log(`Found ${functions.length} functions and ${classes.length} classes`)
       const allEntities = [
         ...functions.map((fn) => ({
           content: fn.Content,
@@ -74101,7 +74103,7 @@ const run = async () => {
           name: cls.Class,
         })),
       ];
-      console.log(allEntities);
+      console.log("Embedding...")
       const embeddings = await embeddingModel.embedDocuments(
         allEntities.map((e) => e.content)
       );
@@ -74118,9 +74120,11 @@ const run = async () => {
       await qdrant.upsert(collectionName, {
         points: points,
       });
+      console.log(`Created Embeddings successfully`)
       return;
     }
 
+    console.log("Reading commit changes...")
     const response = await lib_axios({
       method: "get",
       url: `https://api.github.com/repos/${owner}/${repo}/commits/${commit}`,
@@ -74161,6 +74165,7 @@ const run = async () => {
     console.log(jsonFormat);
     const functions = jsonFormat.Functions || [];
     const classes = jsonFormat.Classes || [];
+    console.log(`Modified ${functions.length} functions and ${classes.length} classes`)
     
     const allEntities = [
       ...functions.map((fn) => ({
@@ -74181,7 +74186,6 @@ const run = async () => {
       })),
     ];
     
-    console.log(allEntities);
 
     const embeddings = await embeddingModel.embedDocuments(
       allEntities.map((e) => e.content)
@@ -74202,6 +74206,7 @@ const run = async () => {
     let pointsToDelete = [];
 
     // Check if points exist and categorize them for update, upsert, or delete
+    console.log("Updating Embeddings for modified entities")
     allEntities.forEach((entity, index) => {
       const existingPoint = existingPoints.points.find(point => point.payload.name === entity.name);
       const id = existingPoint ? existingPoint.id : v4();
@@ -74247,6 +74252,7 @@ const run = async () => {
         ids: pointsToDelete,
       });
     }
+    console.log("Embeddings updated successfully")
 
   } catch (error) {
     console.error(
